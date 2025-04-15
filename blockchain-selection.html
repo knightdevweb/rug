@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from simple-rug.top/blockchain-selection.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:50:47 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleRug</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg"><script src="ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+}
+
+.glass-effect {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem;
+}
+
+header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 28rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+    padding: 1rem;  /* Ajout d'un padding */
+}
+
+.form-container {
+    padding: 1rem;  /* Réduction du padding si nécessaire */
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-banner {
+    padding: 1.5rem;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    margin-bottom: 1rem;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.8s ease forwards;
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#welcome-message {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #60a5fa, #8b5cf6, #60a5fa);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 0 auto;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    animation: shine 3s linear infinite;
+}
+
+.welcome-text {
+    text-align: center;
+    background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 0; /* Supprimé la marge en bas */
+    padding: 0; /* Supprimé le padding */
+}
+
+/* Container des boutons */
+.blockchain-buttons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem;
+    gap: 16px;
+    position: relative;
+}
+
+/* Style de base des boutons */
+.blockchain-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    height: 60px;
+    padding: 1rem 1.5rem;
+    margin: 0 !important;
+    transform: none !important;
+    position: relative;
+    z-index: 1;
+
+    /* Apparence */
+    border-radius: 0.5rem;
+    border: none;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+    background-size: 200% auto;
+    color: white !important;
+    font-weight: 500;
+    
+    /* Interactivité */
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    overflow: hidden;
+
+    /* Fix de visibilité */
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Style des images dans les boutons */
+.blockchain-button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    opacity: 1 !important;
+}
+
+/* Style du texte dans les boutons */
+.blockchain-button span {
+    color: white !important;
+    opacity: 1 !important;
+}
+
+/* Effet au survol */
+.blockchain-button:hover {
+    background-position: right center;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+/* Effet de brillance */
+.blockchain-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.blockchain-button:hover::before {
+    left: 100%;
+}
+
+.rotating-logos {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    margin: 2rem auto;  /* Augmenté la marge */
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.3));
+}
+
+.rotating-logos img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Revenir à l'animation originale qui fonctionnait bien */
+.rotating-logos img:nth-child(1) {
+    animation: fadeInOut 4.5s infinite;
+}
+
+.rotating-logos img:nth-child(2) {
+    animation: fadeInOut 4.5s infinite 1.5s;
+}
+
+.rotating-logos img:nth-child(3) {
+    animation: fadeInOut 4.5s infinite 3s;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    5% {
+        opacity: 0;
+    }
+    15% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    background: linear-gradient(to right, transparent, rgba(30, 58, 138, 0.1), transparent);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+footer a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: linear-gradient(to right, #3b82f6, #9333ea);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">SimpleRug</div>
+        </div>
+    </header>
+
+    <div class="welcome-banner">
+        <h2 id="welcome-message"></h2>
+    </div>
+
+    <main>
+        <div class="container glass-effect">
+            <div class="rotating-logos">
+                <img src="solana.png" alt="Solana">
+                <img src="ethereum.png" alt="Ethereum">
+                <img src="base.png" alt="Base">
+            </div>
+            <h1 class="welcome-text">Select your blockchain</h1>
+            <div class="blockchain-buttons">
+                <a class='blockchain-button' href='creation-sol.html'>
+                    <img src="solana.png" alt="Solana">
+                    <span>Solana</span>
+                </a>
+                <a class='blockchain-button' href='creation-eth.html'>
+                    <img src="ethereum.png" alt="Ethereum">
+                    <span>Ethereum</span>
+                </a>
+                <a class='blockchain-button' href='creation-base.html'>
+                    <img src="base.png" alt="Base">
+                    <span>Base</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+   
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    // Configuration particles.js
+    particlesJS('particles-js', {
+        particles: {
+            number: {
+                value: 100,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: ['#3b82f6', '#8b5cf6', '#60a5fa']
+            },
+            shape: {
+                type: 'circle'
+            },
+            opacity: {
+                value: 0.6,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.1,
+                    sync: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.1,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#3b82f6',
+                opacity: 0.2,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: true,
+                straight: false,
+                out_mode: 'bounce',
+                bounce: false,
+                attract: {
+                    enable: true,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: 'grab'
+                },
+                onclick: {
+                    enable: true,
+                    mode: 'push'
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 0.8
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        retina_detect: true
+    });
+
+    // Affichage du message de bienvenue
+    const username = localStorage.getItem('easyrug_username');
+    if (username) {
+        const welcomeMessage = document.getElementById('welcome-message');
+        welcomeMessage.textContent = `Welcome to SimpleRug, ${username}!`;
+        
+        gsap.from(welcomeMessage, {
+            opacity: 0,
+            y: -20,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+    }
+
+    // Animation des boutons
+    // Animation séquentielle explicite des boutons
+const buttons = document.querySelectorAll('.blockchain-button');
+buttons.forEach((button, index) => {
+    gsap.from(button, {
+        opacity: 0,
+        y: 20,
+        duration: 0.5,
+        delay: index * 0.2,
+        ease: "power2.out",
+        clearProps: "all" // Très important : nettoie les propriétés après l'animation
+    });
+});
+
+    // Animation de transition lors du clic
+    document.querySelectorAll('.blockchain-button').forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            
+            gsap.to('.container', {
+                opacity: 0,
+                y: -20,
+                duration: 0.5,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    window.location.href = href;
+                }
+            });
+        });
+    });
+});
+    </script>
+</body>
+
+<!-- Mirrored from simple-rug.top/blockchain-selection.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:50:52 GMT -->
+</html>

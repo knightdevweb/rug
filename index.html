@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from simple-rug.top/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:49:34 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleRug</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg"><script src="ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #000;
+    color: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow-x: hidden;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+}
+
+.glass-effect {
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem;
+}
+
+header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.container {
+    width: 100%;
+    max-width: 28rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.welcome-text {
+    text-align: center;
+    background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: white;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+input::placeholder {
+    color: rgba(96, 165, 250, 0.5);
+}
+
+button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+    background-size: 200% auto;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+button:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+.login-link {
+    text-align: center;
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.login-link:hover {
+    color: #93c5fd;
+    transform: translateY(-2px);
+}
+
+.logos-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logos-container img {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    filter: grayscale(50%);
+}
+
+.logos-container img:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: grayscale(0%);
+}
+
+footer {
+    padding: 1rem;
+    text-align: center;
+    background: linear-gradient(to right, transparent, rgba(30, 58, 138, 0.1), transparent);
+    border-top: 1px solid rgba(59, 130, 246, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+footer a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background: linear-gradient(to right, #3b82f6, #9333ea);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+}
+
+footer a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+.spinner {
+    display: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.fade-out {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">SimpleRug</div>
+            <div class="logos-container">
+                <img src="solana.png" alt="Solana Logo" width="32" height="32">
+                <img src="ethereum.png" alt="Ethereum Logo" width="32" height="32">
+                <img src="base.png" alt="Base Logo" width="32" height="32">
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container glass-effect">
+            <div class="form-container">
+                <h1 class="welcome-text">Welcome to SimpleRug, your all-in-one bot to Rug Pull on Solana, Ethereum and Base!</h1>
+                <input type="text" placeholder="Username">
+                <input type="password" placeholder="Password">
+                <button id="authButton">
+                    <span>Register</span>
+                    <div class="spinner"></div>
+                </button>
+                <a class="login-link" id="loginLink">Log in</a>
+            </div>
+        </div>
+    </main>
+
+    
+
+    <script>
+        // Initialize particles
+        particlesJS('particles-js', {
+    particles: {
+        number: {
+            value: 100,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        color: {
+            value: ['#3b82f6', '#8b5cf6', '#60a5fa']
+        },
+        shape: {
+            type: 'circle'
+        },
+        opacity: {
+            value: 0.6,
+            random: true,
+            anim: {
+                enable: true,
+                speed: 1,
+                opacity_min: 0.1,
+                sync: false
+            }
+        },
+        size: {
+            value: 3,
+            random: true,
+            anim: {
+                enable: true,
+                speed: 2,
+                size_min: 0.1,
+                sync: false
+            }
+        },
+        line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#3b82f6',
+            opacity: 0.2,
+            width: 1
+        },
+        move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: true,
+            straight: false,
+            out_mode: 'bounce',
+            bounce: false,
+            attract: {
+                enable: true,
+                rotateX: 600,
+                rotateY: 1200
+            }
+        }
+    },
+    interactivity: {
+        detect_on: 'canvas',
+        events: {
+            onhover: {
+                enable: true,
+                mode: 'grab'
+            },
+            onclick: {
+                enable: true,
+                mode: 'push'
+            },
+            resize: true
+        },
+        modes: {
+            grab: {
+                distance: 140,
+                line_linked: {
+                    opacity: 0.8
+                }
+            },
+            push: {
+                particles_nb: 4
+            }
+        }
+    },
+    retina_detect: true
+});
+
+        // Handle login link click
+        const loginLink = document.getElementById('loginLink');
+        const authButton = document.getElementById('authButton');
+        const buttonText = authButton.querySelector('span');
+        const spinner = document.querySelector('.spinner');
+        let isLoginMode = false;
+
+        loginLink.addEventListener('click', () => {
+            isLoginMode = true;
+            buttonText.textContent = 'Log in';
+            loginLink.style.display = 'none';
+        });
+
+        // Handle auth button click
+        authButton.addEventListener('click', async () => {
+    	    const username = document.querySelector('input[type="text"]').value;
+    	    if (!username) {
+                alert('Please enter a username');
+                return;
+    	    }
+    
+    	    buttonText.style.display = 'none';
+    	    spinner.style.display = 'block';
+    
+    // Store username in localStorage
+    	    localStorage.setItem('easyrug_username', username);
+    
+    // Simulate loading for 2 seconds
+    	    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Ajouter la classe fade-out au container
+    document.querySelector('.container').classList.add('fade-out');
+    
+    // Attendre la fin de l'animation
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    // Redirect to main.html
+    	    window.location.href = 'blockchain-selection.html';
+        });
+
+        // Animations des inputs
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('focus', () => {
+        input.style.transform = 'translateY(-2px)';
+    });
+    
+    input.addEventListener('blur', () => {
+        input.style.transform = 'translateY(0)';
+    });
+});
+
+loginLink.addEventListener('click', () => {
+    isLoginMode = true;
+    buttonText.textContent = 'Log in';
+    loginLink.style.display = 'none';
+    
+    // Animation du texte du bouton
+    gsap.from(buttonText, {
+        opacity: 0,
+        y: 10,
+        duration: 0.3
+    });
+});
+
+authButton.addEventListener('click', async () => {
+    const username = document.querySelector('input[type="text"]').value;
+    if (!username) {
+        // Animation de secousse pour input vide
+        gsap.to('input[type="text"]', {
+            x: [-10, 10, -10, 10, 0],
+            duration: 0.4,
+            ease: "power2.out"
+        });
+        return;
+    }
+
+    buttonText.style.display = 'none';
+    spinner.style.display = 'block';
+
+    localStorage.setItem('easyrug_username', username);
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Animation de fade out améliorée
+    gsap.to('.container', {
+        opacity: 0,
+        y: -20,
+        duration: 0.5,
+        ease: "power2.inOut",
+        onComplete: () => {
+            window.location.href = 'blockchain-selection.html';
+        }
+    });
+});
+    </script>
+</body>
+
+<!-- Mirrored from simple-rug.top/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:49:47 GMT -->
+</html>

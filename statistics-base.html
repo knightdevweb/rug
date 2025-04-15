@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from simple-rug.top/statistics-base by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+    <title>SimpleRug</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg"><script src="ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+        body {
+            background-color: black;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+}
+
+        header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+    width: 100%;
+    max-width: 48rem;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem;
+}
+
+.stats-title {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+        .stats-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stats-card {
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+        .card-label {
+            font-size: 0.875rem;
+            color: #94a3b8;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #60a5fa, #8b5cf6);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.last-rugs-container {
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.last-rugs-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.1);
+}
+
+        .last-rugs-title {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .empty-list {
+            color: #94a3b8;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.875rem;
+        }
+
+        footer {
+            padding: 1rem;
+            text-align: center;
+            background: linear-gradient(to right, black, rgba(30, 58, 138, 0.1), black);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.125rem;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #93c5fd;
+        }
+
+        .profile-picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+
+        .back-button-container {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.5rem;
+    color: #60a5fa;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.back-button:hover {
+    background: rgba(30, 58, 138, 0.3);
+    border-color: rgba(59, 130, 246, 0.5);
+    transform: translateX(-4px);
+}
+
+.back-button:hover::before {
+    left: 100%;
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">SimpleRug</div>
+            <img src="base.png" alt="Solana Logo" width="32" height="32">
+        </div>
+    </header>
+
+    <div class="back-button-container">
+        <button class="back-button" onclick="window.location.href='creation-base-2.html'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7"/>
+                <path d="M19 12H5"/>
+            </svg>
+            Back to token creation
+        </button>
+    </div>
+
+    <main>
+        <div class="container fade-in">
+            <h1 class="stats-title">Statistics</h1>
+
+            <div class="stats-cards">
+                <div class="stats-card">
+                    <div class="card-label">Total Profit</div>
+                    <div class="card-value">0 ETH</div>
+                </div>
+                <div class="stats-card">
+                    <div class="card-label">Successful Rugs</div>
+                    <div class="card-value">0</div>
+                </div>
+            </div>
+
+            <div class="last-rugs-container">
+                <h2 class="last-rugs-title">Last Rugs</h2>
+                <div class="empty-list">No rugs available yet</div>
+            </div>
+        </div>
+    </main>
+
+    
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#3b82f6'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#3b82f6',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'bounce',
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Ajoutez dans le header un lien de retour
+        const logoContainer = document.querySelector('.logo-container');
+        logoContainer.style.cursor = 'pointer';
+        logoContainer.addEventListener('click', async () => {
+            document.querySelector('.container').classList.add('fade-out');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            window.location.href = 'blockchain-selection.html';
+        });
+
+        
+    </script>
+</body>
+
+<!-- Mirrored from simple-rug.top/statistics-base by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+</html>

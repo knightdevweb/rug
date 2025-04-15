@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from simple-rug.top/settings-bot by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimpleRug</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg"><script src="ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+        body {
+            background-color: black;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+}
+
+        header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+    width: 100%;
+    max-width: 48rem;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem;
+}
+
+        .settings-title {
+            font-size: 1.875rem;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .wallet-section {
+            background: rgba(30, 58, 138, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .wallet-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background-color: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            color: white;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .wallet-input:focus {
+            outline: none;
+            border-color: rgba(59, 130, 246, 0.6);
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .features-section {
+            background: rgba(30, 58, 138, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        .features-title {
+            font-size: 1.25rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .checkbox-group {
+            display: grid;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #94a3b8;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 0.25rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            background-color: rgba(17, 24, 39, 0.7);
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .radio-button {
+            padding: 0.75rem 1rem;
+            background: rgba(17, 24, 39, 0.7);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .radio-button:hover:not(.selected) {
+            background: rgba(30, 58, 138, 0.3);
+        }
+
+        .radio-button.selected {
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            border-color: transparent;
+        }
+
+        .spinner {
+            display: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        footer {
+            padding: 1rem;
+            text-align: center;
+            background: linear-gradient(to right, black, rgba(30, 58, 138, 0.1), black);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.125rem;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #93c5fd;
+        }
+
+        .profile-picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+	.logout-button {
+	    width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to right, #dc2626, #991b1b);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+	.logout-button:hover {
+            transform: translateY(-2px);
+    	    background: linear-gradient(to right, #b91c1c, #7f1d1d);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: scale(0.95);
+            animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+        
+        .logout-section {
+            width: 100%;
+            max-width: 48rem;
+            padding: 1rem;
+        margin-top: 2rem;
+        }
+
+        .logout-button {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(to right, #dc2626, #991b1b);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .logout-button:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(to right, #b91c1c, #7f1d1d);
+        }
+
+        .logout-section.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+        
+        .settings-submit-button {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(to right, #2563eb, #7c3aed);
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .settings-submit-button:hover {
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            transform: translateY(-2px);
+        }
+
+        .settings-success-message {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #34d399;
+            border-radius: 0.5rem;
+            text-align: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .back-button-container {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(30, 58, 138, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            color: #60a5fa;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(30, 58, 138, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateX(-4px);
+        }
+
+        .switch-button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: rgba(30, 58, 138, 0.2);
+    color: white;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.switch-button:hover {
+    transform: translateY(-2px);
+    background: rgba(30, 58, 138, 0.4);
+    border-color: rgba(59, 130, 246, 0.5);
+}
+
+.switch-button img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+/* Mise à jour du style logout-section pour ajouter de l'espace */
+.logout-section {
+    width: 100%;
+    max-width: 48rem;
+    padding: 2rem 1rem 1rem 1rem;
+    margin-top: 1rem;
+}
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">SimpleRug</div>
+            <img src="base.png" alt="Base Logo" width="32" height="32">
+        </div>
+    </header>
+
+    <div class="back-button-container">
+        <button class="back-button" onclick="window.location.href='creation-base-2.html'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="m12 19-7-7 7-7"/>
+                <path d="M19 12H5"/>
+            </svg>
+            Back to token creation
+        </button>
+    </div>
+
+    <main>
+        <div class="container fade-in">
+            <h1 class="settings-title">Settings</h1>
+
+            
+            <div class="logout-section">
+                <button class="switch-button solana" onclick="window.location.href='creation-sol-2.html'">
+                    <img src="solana.png" alt="Solana" width="24" height="24">
+                    Switch to Solana
+                </button>
+                <button class="switch-button base" onclick="window.location.href='creation-eth-2.html'">
+                    <img src="ethereum.png" alt="Eth" width="24" height="24">
+                    Switch to Ethereum
+                </button>
+                <button class="logout-button" onclick="window.location.href='index-2.html'">
+                    Log out
+                </button>
+            </div>
+
+            <script>
+                // Handle submit button click
+                const submitButton = document.querySelector('.submit-button');
+                const buttonText = document.querySelector('.button-text');
+                const spinner = document.querySelector('.spinner');
+                const successMessage = document.querySelector('.success-message');
+
+                submitButton.addEventListener('click', async () => {
+                    buttonText.style.display = 'none';
+                    spinner.style.display = 'block';
+                    
+                    // Simulate 2 second loading
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    
+                    spinner.style.display = 'none';
+                    buttonText.style.display = 'block';
+                    successMessage.style.display = 'block';
+                });
+
+                // Handle radio button selection
+                const radioButtons = document.querySelectorAll('.radio-button');
+                radioButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        radioButtons.forEach(btn => btn.classList.remove('selected'));
+                        button.classList.add('selected');
+                    });
+                });
+            </script>
+        </div>
+    </main>
+
+   
+
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#3b82f6'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#3b82f6',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'bounce',
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Ajoutez dans le header un lien de retour
+        const logoContainer = document.querySelector('.logo-container');
+        logoContainer.style.cursor = 'pointer';
+        logoContainer.addEventListener('click', async () => {
+            document.querySelector('.container').classList.add('fade-out');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            window.location.href = 'blockchain-selection.html';
+        });
+        
+        // Gestionnaire pour le bouton Logout
+        document.querySelector('.logout-button').addEventListener('click', async () => {
+            document.querySelector('.container').classList.add('fade-out');
+            document.querySelector('.logout-section').classList.add('fade-out');
+    
+            // Sauvegarder l'état des particules
+            saveParticlesState();
+    
+            await new Promise(resolve => setTimeout(resolve, 300));
+            window.location.href = 'index-2.html';
+        });
+
+        // Gestion des checkboxes et du bouton Submit settings
+        const checkboxes = document.querySelectorAll('.checkbox-wrapper input[type="checkbox"]');
+        const submitSettingsButton = document.getElementById('submitSettings');
+        const settingsSuccessMessage = document.getElementById('settingsSuccessMessage');
+
+        // Vérifier si au moins une checkbox est cochée
+        function updateSubmitButton() {
+            const isAnyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            submitSettingsButton.style.display = isAnyChecked ? 'block' : 'none';
+            // Cacher le message de succès quand on change les checkboxes
+            settingsSuccessMessage.style.display = 'none';
+        }
+
+        // Ajouter les event listeners aux checkboxes
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', updateSubmitButton);
+        });
+
+        // Gérer le clic sur le bouton Submit settings
+        submitSettingsButton.addEventListener('click', () => {
+            settingsSuccessMessage.style.display = 'block';
+            // Faire défiler jusqu'au message
+            settingsSuccessMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+    </script>
+</body>
+
+<!-- Mirrored from simple-rug.top/settings-bot by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+</html>

